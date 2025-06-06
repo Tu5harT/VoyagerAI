@@ -1,7 +1,8 @@
 # Dockerfile.actions
 # Builds the Rasa actions server
 
-FROM rasa/rasa-sdk:3.6
+# FROM rasa/rasa-sdk:latest
+FROM rasa/rasa-sdk:3.6.10
 WORKDIR /app
 COPY actions/ /app/actions
 COPY requirements.txt .
