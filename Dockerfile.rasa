@@ -1,7 +1,7 @@
 # Dockerfile.rasa
 # Builds the main Rasa server
 
-FROM rasa/rasa:3.6.10
+FROM rasa/rasa:3.6
 WORKDIR /app
 COPY . /app
 USER rasa
