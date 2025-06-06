@@ -2,8 +2,7 @@
 # Builds the main Rasa server
 
 # FROM rasa/rasa:latest
-# FROM rasa/rasa:3.6.10
-FROM docker pull rasa/rasa
+ FROM rasa/rasa:3.6.10
 WORKDIR /app
 COPY . /app
 USER rasa
