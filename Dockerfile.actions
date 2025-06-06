@@ -1,8 +1,7 @@
 # Dockerfile.actions
-# Builds the Rasa actions server
-
-# FROM rasa/rasa-sdk:latest
-FROM rasa/rasa-sdk:3.6.10
+# Using the 'latest' tag for the SDK, as specific patch versions are not published.
+# This is the stable, compatible SDK for all recent 3.x Rasa versions.
+FROM rasa/rasa-sdk:latest
 
 WORKDIR /app
 COPY actions/ /app/actions
@@ -10,5 +9,4 @@ COPY requirements.txt .
 USER root
 RUN pip install --no-cache-dir -r requirements.txt
 USER 1001
-# Render also provides a PORT env var for this service.
 CMD ["start", "--actions", "actions", "--port", "$PORT"]

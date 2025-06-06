@@ -1,10 +1,8 @@
 # Dockerfile.rasa
-# Builds the main Rasa server
+# Pinning the main application to the exact version used in development.
+FROM rasa/rasa:3.6.10
 
-# FROM rasa/rasa:latest
- FROM rasa/rasa:3.6.10
 WORKDIR /app
 COPY . /app
 USER rasa
-# Render provides a PORT env var we must use.
 CMD ["run", "--enable-api", "--cors", "*", "--port", "$PORT"]
