@@ -5,4 +5,4 @@ FROM rasa/rasa:3.6.10
 WORKDIR /app
 COPY . /app
 USER rasa
-CMD ["run", "--enable-api", "--cors", "*", "--port", "$PORT"]
+CMD rasa run --enable-api --cors "*" --port $PORT
