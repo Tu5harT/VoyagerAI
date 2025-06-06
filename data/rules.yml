@@ -1,0 +1,45 @@
+# data/rules.yml
+version: "3.1"
+
+rules:
+  - rule: Say goodbye anytime the user says goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: Say hello when user greets
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - rule: Answer bot challenge
+    steps:
+      - intent: bot_challenge
+      - action: utter_iamabot
+
+  - rule: Handle info questions
+    steps:
+      - intent: ask_info
+      - action: utter_ask_info
+
+  - rule: Activate trip planner form for forecast
+    steps:
+      - intent: check_forecast
+      - action: trip_planner_form
+      - active_loop: trip_planner_form
+
+  - rule: Activate trip planner form for packing
+    steps:
+      - intent: get_packing_list
+      - action: trip_planner_form
+      - active_loop: trip_planner_form
+
+  - rule: Submit form and get info
+    condition:
+      - active_loop: trip_planner_form
+    steps:
+      - action: trip_planner_form
+      - active_loop: null
+      - action: utter_submit
+      - action: action_fetch_forecast
+      - action: action_suggest_packing_items

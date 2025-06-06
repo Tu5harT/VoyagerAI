@@ -1,0 +1,12 @@
+# Dockerfile.actions
+# Builds the Rasa actions server
+
+FROM rasa/rasa-sdk:3.6.14
+WORKDIR /app
+COPY actions/ /app/actions
+COPY requirements.txt .
+USER root
+RUN pip install --no-cache-dir -r requirements.txt
+USER 1001
+# Render also provides a PORT env var for this service.
+CMD ["start", "--actions", "actions", "--port", "$PORT"]
