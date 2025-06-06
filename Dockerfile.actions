@@ -9,4 +9,4 @@ COPY requirements.txt .
 USER root
 RUN pip install --no-cache-dir -r requirements.txt
 USER 1001
-CMD [ "sh", "-c", "rasa-sdk start --actions actions --port $PORT" ]
+CMD ["start", "--actions", "actions", "--port", "10000"]
