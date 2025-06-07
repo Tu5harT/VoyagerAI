@@ -1,7 +1,4 @@
-# requirements.txt (Final Gunicorn Version)
+# requirements.txt (Final Simplified Version)
 rasa==3.6.10
 requests==2.31.0
 python-dotenv==1.0.0
-gunicorn==20.1.0
-aiohttp==3.9.1
-aiohttp-cors==0.7.0

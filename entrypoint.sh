@@ -1,10 +1,7 @@
 #!/bin/sh
+set -e
 
 # This script starts the Rasa server with all necessary flags.
-# We are telling Rasa to use Gunicorn as its web server.
-rasa run \
-    --enable-api \
-    --cors "*" \
-    --workers 1 \
-    -p 10000 \
-    --debug
+# The --cors "*" flag is essential for the REST channel.
+# We are using port 10000 as configured for Render.
+rasa run --enable-api --cors "*" -p 10000 --debug

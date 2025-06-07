@@ -1,14 +1,9 @@
-# Dockerfile.rasa (Gunicorn Version)
-
+# Dockerfile.rasa (Final Simplified Version)
 FROM rasa/rasa:3.6.10
 WORKDIR /app
 
-# Copy requirements first to leverage Docker layer caching
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the rest of the project
+# Copy all project files
 COPY . .
 
-# The entrypoint.sh script will be run when the container starts.
+# Run the entrypoint script
 ENTRYPOINT ["./entrypoint.sh"]
