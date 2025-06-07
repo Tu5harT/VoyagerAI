@@ -1,4 +1,8 @@
 # config.yml
+
+importers:
+- name: cors_component.bp
+
 recipe: default.v1
 language: en
 
