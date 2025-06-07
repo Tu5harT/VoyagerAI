@@ -1,8 +1,13 @@
-# Dockerfile.rasa
-# Pinning the main application to the exact version used in development.
+# Dockerfile.rasa (Final Version with entrypoint script)
+
+# Use the exact version of Rasa you developed with.
 FROM rasa/rasa:3.6.10
 
+# Set the working directory.
 WORKDIR /app
+
+# Copy all your project files into the container.
 COPY . /app
-USER rasa
-CMD ["run", "--enable-api", "--cors", "*", "--port", "10000"]
+
+# The entrypoint.sh script will be run when the container starts.
+ENTRYPOINT ["./entrypoint.sh"]
