@@ -12,20 +12,22 @@ COPY . /app
 # Switch to the root user to install packages
 USER root
 
-# === NEW: Install Node.js and npm ===
-# First, update the package lists
-RUN apt-get update -y
-# Then, install nodejs and npm
-RUN apt-get install -y nodejs npm
+# Install Node.js and npm
+RUN apt-get update -y && apt-get install -y nodejs npm
 
-# Install Python dependencies from requirements.txt
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Node.js dependencies (for concurrently)
+# Install Node.js dependencies
 RUN npm install
 
-# Switch back to the non-privileged user for security
+# Switch back to the non-privileged user
 USER 1001
 
-# The command to run when the container starts
-CMD [ "npm", "start" ]
+# === THE FINAL FIX ===
+# Override the default entrypoint of the base image.
+# We want to use npm as our starting point, not 'rasa'.
+ENTRYPOINT [ "npm" ]
+
+# Now, provide the argument to the new entrypoint ('npm').
+CMD [ "start" ]
