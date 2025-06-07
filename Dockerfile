@@ -1,19 +1,22 @@
-# Final Single-Service Dockerfile
+# Final Single-Service Dockerfile v2
 
+# Start from the base Rasa image
 FROM rasa/rasa:3.6.10
 
+# Set working directory
 WORKDIR /app
 
-# Copy requirements and install them as root to avoid permission errors
-COPY requirements.txt .
+# Copy all project files
+COPY . /app
+
+# Switch to the root user to install packages
 USER root
-RUN pip install -r requirements.txt
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Switch back to the non-privileged user
 USER 1001
 
-# Copy the rest of your project files
-COPY . .
-
-# Command to run our custom server startup script
-CMD ["python", "-m", "app"]
+# Command to run Rasa, which will auto-start the action server
+CMD ["run", "--enable-api", "--cors", "*", "-p", "10000", "--debug"]
