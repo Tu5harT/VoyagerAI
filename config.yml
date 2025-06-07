@@ -1,5 +1,11 @@
 # config.yml
-
+# config.yml
+runtime:
+  action_server:
+    # This tells the 'rasa run' command to also start an action server
+    # in a background process. This is the simplest way.
+    auto_start: true
+    
 importers:
 - name: cors_component.bp
 
