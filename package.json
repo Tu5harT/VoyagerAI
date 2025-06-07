@@ -1,0 +1,10 @@
+{
+    "name": "rasa-voyagerai",
+    "version": "1.0.0",
+    "scripts": {
+      "start": "concurrently --kill-others \"rasa run actions\" \"rasa run --enable-api --cors '*' -p 8080 --debug\""
+    },
+    "dependencies": {
+      "concurrently": "^7.0.0"
+    }
+  }

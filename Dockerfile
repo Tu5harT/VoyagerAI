@@ -1,22 +1,25 @@
-# Final Single-Service Dockerfile v2
+# Final, working Dockerfile for single service
 
-# Start from the base Rasa image
 FROM rasa/rasa:3.6.10
 
-# Set working directory
 WORKDIR /app
 
-# Copy all project files
-COPY . /app
-
-# Switch to the root user to install packages
+# Switch to root to install system and python packages
 USER root
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Node.js, npm, and Python dependencies
+RUN apt-get update -y && \
+    apt-get install -y nodejs npm && \
+    pip install --no-cache-dir -r requirements.txt
 
-# Switch back to the non-privileged user
+# Copy all project files
+COPY . .
+
+# Install npm dependencies (for concurrently)
+RUN npm install
+
+# Switch back to the non-privileged user for security
 USER 1001
 
-# Command to run Rasa, which will auto-start the action server
-CMD ["run", "--enable-api", "--cors", "*", "-p", "10000", "--debug"]
+# Command to run both servers
+CMD ["npm", "start"]
