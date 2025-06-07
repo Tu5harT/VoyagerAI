@@ -1,0 +1,14 @@
+{
+    "name": "rasa-single-service",
+    "version": "1.0.0",
+    "description": "Runs Rasa and Actions server together.",
+    "main": "index.js",
+    "scripts": {
+      "start": "concurrently \"rasa run --enable-api --cors '*' -p $PORT\" \"rasa run actions\""
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "concurrently": "^7.0.0"
+    }
+  }

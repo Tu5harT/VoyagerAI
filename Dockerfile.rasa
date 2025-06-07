@@ -1,9 +1,0 @@
-# Dockerfile.rasa (Final Simplified Version)
-FROM rasa/rasa:3.6.10
-WORKDIR /app
-
-# Copy all project files
-COPY . .
-
-# Run the entrypoint script
-ENTRYPOINT ["./entrypoint.sh"]
