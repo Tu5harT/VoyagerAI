@@ -9,14 +9,17 @@ WORKDIR /app
 # Copy all project files
 COPY . /app
 
+# Switch to the root user to install packages
+USER root
+
 # Install Python dependencies from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Install Node.js dependencies (for concurrently)
 RUN npm install
 
-# Expose the public port for the Rasa server
-EXPOSE 8080
+# Switch back to the non-privileged user for security
+USER 1001
 
 # The command to run when the container starts
 CMD [ "npm", "start" ]
