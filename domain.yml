@@ -1,0 +1,78 @@
+# domain.yml
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - check_forecast  # Renamed from ask_weather
+  - get_packing_list # Renamed from recommend_packing
+  - ask_info:       # Renamed from faq
+      is_retrieval_intent: true
+  - bot_challenge
+
+entities:
+  - location
+  - start_date
+  - end_date
+
+slots:
+  destination_city:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: location
+  start_date:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: start_date
+  end_date:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: end_date
+  weather_condition: # Renamed from weather_description
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+responses:
+  utter_greet:
+    - text: "Greetings, traveler! Voyager AI here, ready to help you map out your next adventure. What can I do for you?"
+  utter_goodbye:
+    - text: "Safe travels! May your journey be epic."
+  utter_iamabot:
+    - text: "I'm Voyager AI, a digital companion for adventurers, built with the powerful Rasa framework."
+  utter_ask_destination_city:
+    - text: "Awesome! What's the destination for this grand adventure?"
+  utter_ask_start_date:
+    - text: "Got it. When does the journey begin?"
+  utter_ask_end_date:
+    - text: "And when will you be returning?"
+  utter_submit:
+    - text: "Excellent! Plotting the course and checking the conditions now..."
+  utter_fallback:
+    - text: "Hmm, that's off my map. I can help with weather forecasts and packing lists for your trip. What's the plan?"
+  utter_ask_info/rasa:
+    - text: "Rasa is a fantastic open-source platform that developers use to build advanced AI assistants like me!"
+  utter_ask_info/builder:
+    - text: "I was brought to life by a forward-thinking developer for an assessment by Yoliday, designed to explore new frontiers in bot technology."
+  utter_ask_info/planning:
+    - text: "Planning an adventure is easy! Just tell me where you're headed, and I can fetch the forecast and suggest what gear to pack."
+
+actions:
+  - action_fetch_forecast      # Renamed
+  - action_suggest_packing_items # Renamed
+
+forms:
+  trip_planner_form: # Renamed from travel_form
+    required_slots:
+      - destination_city
+      - start_date
+      - end_date

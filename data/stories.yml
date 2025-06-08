@@ -1,0 +1,23 @@
+# data/stories.yml
+version: "3.1"
+
+stories:
+  - story: Full journey planning path
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: check_forecast
+        entities:
+          - location: "Cairo"
+      - action: trip_planner_form
+      - active_loop: trip_planner_form
+      - slot_was_set:
+          - destination_city: "Cairo"
+      # ... form continues ...
+      - action: trip_planner_form
+      - active_loop: null
+      - action: utter_submit
+      - action: action_fetch_forecast
+      - action: action_suggest_packing_items
+      - intent: goodbye
+      - action: utter_goodbye
