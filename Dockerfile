@@ -1,4 +1,5 @@
-# Final Dockerfile for Replit/Railway Single Service
+# Final Dockerfile for public image
+
 FROM rasa/rasa:3.6.10
 
 WORKDIR /app
@@ -10,6 +11,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN npm install
 USER 1001
 
-# Override the base image's entrypoint to use npm
 ENTRYPOINT ["/usr/bin/npm"]
-CMD ["start"]
+CMD [ "start" ]
